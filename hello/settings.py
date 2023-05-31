@@ -11,10 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
-import dj_database_url
 
-
-from dotenv import load_dotenv
 from django.contrib.messages import constants as messages
 import os 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
