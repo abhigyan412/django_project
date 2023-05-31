@@ -27,13 +27,13 @@ SECRET_KEY = 'django-insecure-*c4xhmws*w$-bkpgf=d)ow74yxns#%-zmcd!zcwczzkk@%7g3)
 DEBUG = True
 
 ALLOWED_HOSTS = []
-RENDER_EXTERNAL_HOSTNAME = os.environ.get('https://creams21.onrender.com')
+RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'render.apps.RenderConfig'
+    'render.apps.RenderConfig',
     'home.apps.HomeConfig',
     'django.contrib.admin',
     'django.contrib.auth',
