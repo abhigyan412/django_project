@@ -12,7 +12,9 @@ def about(request):
     #return HttpResponse("This is about page")
 def services(request):
     return render(request,'services.html')
-    #return HttpResponse("This is services page")    
+    #return HttpResponse("This is services page")
+def someone(request):
+    return render(request,'someone.html')    
 def contact(request):
     if request.method == "POST":
         email=request.POST.get('email')
