@@ -17,13 +17,18 @@
 {% csrf_token %}
 
 <div class=" form-group mb-3">
-  <label for="email" class="form-label">Thier Name</label>
+  <label for="email" class="form-label">Their Name</label>
   <input type="text" class="form-control" id="email"  name="email" placeholder="Enter thier name">
 </div>
 <div class=" form-group mb-3">
-  <label for="desc" class="form-label">Thier adress</label>
+  <label for="desc" class="form-label">Their adress</label>
   <textarea class="form-control" id="desc"  name="desc"   placeholder="Adress"rows="3"></textarea>
 </div>
+
+<div class=" form-group mb-3">
+    <label for="desc" class="form-label">Describe ice cream</label>
+    <textarea class="form-control" id="desc"  name="desc"   placeholder="Mention - Flavours /Quantity/Type"rows="3"></textarea>
+  </div>
 <div class=" form-group mb-3">
     <label for="email" class="form-label">Contact number </label>
     <input type="integer" class="form-control" id="email"  name="email" placeholder="Enter Number">
