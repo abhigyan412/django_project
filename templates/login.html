@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %} contact{% endblock title %}
+
+{% block body %}
+<div class="containern- fluid">
+    <img src="https://source.unsplash.com/1200x400/?gifts" class="d-block w-100 my-4" alt="...">
+    </div>
+    <div class="container">
+    
+    
+    <h1 class="text-center"> LOGIN-</h1>
+    
+    {% csrf_token %}
+    
+    
+    <form method ="post"  action="/login">
+    {% csrf_token %}
+    
+    
+   
+    <div class=" form-group mb-3">
+        <label for="email" class="form-label">Contact number </label>
+        <input type="integer" class="form-control" id="email"  name="email" placeholder="Enter Number">
+      </div>
+
+      <div class=" form-group mb-3">
+        <label for="password" class="form-label">Contact number </label>
+        <input type="password" class="form-control" id="password"  name="password" placeholder="Enter password">
+      </div>  
+    
+    <button class="btn btn-primary" type="submit">Submit</button>
+    </form>
+
+
+
+
+
+{% endblock body %}

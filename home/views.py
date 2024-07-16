@@ -3,6 +3,8 @@ from django.contrib import messages
 
 from home.models import Contact
 def index(request):
+
+    
     
     return render(request,'index.html' )
    
@@ -25,3 +27,13 @@ def contact(request):
     
     return render(request,'contact.html')
     #return HttpResponse("This is contact page ")     
+
+def login(request):
+    if request.method == "POST":
+        contact = request.POST.get('contact')   
+        password = request.POST.get('password')
+
+    return render(request,'login.html')        
+
+def signup(request):
+    pass
