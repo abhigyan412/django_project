@@ -29,10 +29,6 @@ def contact(request):
     #return HttpResponse("This is contact page ")     
 
 def login(request):
-    if request.method == "POST":
-        contact = request.POST.get('contact')   
-        password = request.POST.get('password')
-
     return render(request,'login.html')        
 
 def signup(request):
