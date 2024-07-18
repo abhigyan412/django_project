@@ -8,7 +8,7 @@ class Contact(models.Model):
        desc=models.TextField(max_length=250)
 
 class signup(models.Model):
-      contact = models.IntegerField()
+      contact = models.IntegerField(default=False)
       password = models.CharField(max_length = 15)
 
 

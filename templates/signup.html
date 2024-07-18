@@ -1,16 +1,15 @@
-
 <div class="containern- fluid">
     <img src="https://source.unsplash.com/1200x400/?gifts" class="d-block w-100 my-4" alt="...">
     </div>
     <div class="container">
     
     
-    <h1 class="text-center"> LOGIN-</h1>
+    <h1 class="text-center"> SIGNUP-</h1>
     
     {% csrf_token %}
     
     
-    <form method ="POST"  action="/login">
+    <form method ="POST"  action="/signup">
     {% csrf_token %}
     
     
@@ -23,12 +22,7 @@
       <div class=" form-group mb-3">
         <label for="password" class="form-label">Contact number </label>
         <input type="password" class="form-control" id="password"  name="password" placeholder="Enter password">
-      </div>
-
+      </div>  
     
     <button class="btn btn-primary" type="submit">Submit</button>
     </form>
-
-
-
-

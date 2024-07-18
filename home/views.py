@@ -3,9 +3,10 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login as auth_login
 from django.conf import settings
 from .models import Transaction
-from payTm import generate_checksum, verify_checksum
+from .checksum import generate_checksum, verify_checksum
 from django.views.decorators.csrf import csrf_exempt
 from home.models import Contact
+from home.models import signup
 
 
 
@@ -36,10 +37,19 @@ def contact(request):
     #return HttpResponse("This is contact page ")     
 
 def login(request):
+
+
     return render(request,'login.html')        
 
-def signup(request):
-    pass
+def signup_view(request):
+    if request.method == "POST":
+        contact = request.POST.get('contact')
+        password = request.POST.get('password')
+        df=signup(contact = contact , password =  password)
+        df.save()
+        messages.success(request, 'Signed up successfully')   
+    
+    return render(request ,'signup.html')    
 
 def initiate_payment(request):
     if request.method == "GET":
