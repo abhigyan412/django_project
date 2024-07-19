@@ -1,6 +1,9 @@
 from django.shortcuts import render,HttpResponse
 from django.contrib import messages
+from django.contrib.auth.models import User 
+from django.contrib.auth import authenticate, login
 from django.contrib.auth import authenticate, login as auth_login
+
 from django.conf import settings
 from .models import Transaction
 from .checksum import generate_checksum, verify_checksum
@@ -37,6 +40,18 @@ def contact(request):
     #return HttpResponse("This is contact page ")     
 
 def login(request):
+    if request.method == "POST":
+        contact = request.POST['contact']
+        password  = request.POST['password']
+
+        df = authenticate(contact = contact , password = password)
+
+        if df is not None:
+            login(request , df )
+            return 
+        else:
+            messages.success(request, 'Invalid credentials.')
+            return render(request, 'login.html')
 
 
     return render(request,'login.html')        
@@ -46,8 +61,12 @@ def signup_view(request):
         contact = request.POST.get('contact')
         password = request.POST.get('password')
         df=signup(contact = contact , password =  password)
-        df.save()
-        messages.success(request, 'Signed up successfully')   
+        if signup.objects.filter(contact = contact).exists():
+            messages.success(request, 'Contact already exists please sign in ')   
+
+        else:
+         df.save()
+         messages.success(request, 'Signed up successfully')   
     
     return render(request ,'signup.html')    
 
