@@ -10,6 +10,7 @@ from .checksum import generate_checksum, verify_checksum
 from django.views.decorators.csrf import csrf_exempt
 from home.models import Contact
 from home.models import signup
+from django.contrib.auth.decorators import login_required
 
 
 
@@ -41,14 +42,14 @@ def contact(request):
 
 def login(request):
     if request.method == "POST":
-        contact = request.POST['contact']
-        password  = request.POST['password']
+        contact = request.POST.get('contact')
+        password  = request.POST.get('password')
 
         df = authenticate(contact = contact , password = password)
 
         if df is not None:
             login(request , df )
-            return 
+            return render(request, 'someone.html')
         else:
             messages.success(request, 'Invalid credentials.')
             return render(request, 'login.html')
@@ -60,9 +61,10 @@ def signup_view(request):
     if request.method == "POST":
         contact = request.POST.get('contact')
         password = request.POST.get('password')
-        df=signup(contact = contact , password =  password)
-        if signup.objects.filter(contact = contact).exists():
-            messages.success(request, 'Contact already exists please sign in ')   
+        dr = signup.objects.filter(contact=contact)
+        df=signup(contact = contact , password = password )
+        if dr.exists():
+            messages.info(request, 'Contact already exists please sign in ')   
 
         else:
          df.save()
