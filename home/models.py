@@ -12,6 +12,11 @@ class signup(models.Model):
       password = models.CharField(max_length = 15)
 
 
+class icecream(models.Model):
+     name = models.CharField(max_length=20)
+     image = models.ImageField()
+     price = models.FloatField()
+
 class Transaction(models.Model):
     made_by = models.ForeignKey(User, related_name='transactions', 
                                 on_delete=models.CASCADE)
@@ -27,8 +32,5 @@ class Transaction(models.Model):
         return super().save(*args, **kwargs)
 
 
-class icecream(models.Model):
-     name = models.CharField(max_length=20)
-     price = models.FloatField()
-     image = models.ImageField()
+
      
