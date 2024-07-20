@@ -45,11 +45,13 @@ def login(request):
         contact = request.POST.get('contact')
         password  = request.POST.get('password')
 
-        df = authenticate(contact = contact , password = password)
+        dr = signup.objects.filter(contact=contact)
+        ds = signup.objects.filter(password=password)
 
-        if df is not None:
-            login(request , df )
+        if dr.exists() and ds.exists():
+            messages.success(request, 'succesfully logged in ')
             return render(request, 'someone.html')
+        
         else:
             messages.success(request, 'Invalid credentials.')
             return render(request, 'login.html')
@@ -137,4 +139,5 @@ def handlerequest(request):
             return render(request, 'payments/callback.html', context=received_data)
         return render(request, 'payments/callback.html', context=received_data)        
 
-    
+def icecream(request):
+       return  render(request ,'icecream.html')

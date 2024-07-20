@@ -25,3 +25,10 @@ class Transaction(models.Model):
         if self.order_id is None and self.made_on and self.id:
             self.order_id = self.made_on.strftime('PAY2ME%Y%m%dODR') + str(self.id)
         return super().save(*args, **kwargs)
+
+
+class icecream(models.Model):
+     name = models.CharField(max_length=20)
+     price = models.FloatField()
+     image = models.ImageField()
+     

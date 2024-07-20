@@ -1,3 +1,9 @@
+{% extends 'base.html' %}
+{% block title %} contact{% endblock title %}
+
+{% block body %}
+
+
 <div class="containern- fluid">
     <img src="https://source.unsplash.com/1200x400/?gifts" class="d-block w-100 my-4" alt="...">
     </div>
@@ -15,14 +21,20 @@
     
    
     <div class=" form-group mb-3">
-        <label for="email" class="form-label">Contact number </label>
+        <label for="email" class="form-label">contact </label>
         <input type="integer" class="form-control" id="contact"  name="contact" placeholder="Enter Number">
       </div>
 
       <div class=" form-group mb-3">
-        <label for="password" class="form-label">Password </label>
+        <label for="password" class="form-label">password </label>
         <input type="password" class="form-control" id="password"  name="password" placeholder="Enter password">
       </div>  
     
     <button class="btn btn-primary" type="submit">Submit</button>
     </form>
+
+
+    <li class="nav-item">
+      <a class="nav-link" href="/login">  LOGIN</a>
+    </li>
+    {% endblock body %}
