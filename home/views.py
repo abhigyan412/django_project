@@ -11,6 +11,8 @@ from django.views.decorators.csrf import csrf_exempt
 from home.models import Contact
 from home.models import signup
 from django.contrib.auth.decorators import login_required
+from math import ceil
+from  home.models import icecream
 
 
 
@@ -139,6 +141,11 @@ def handlerequest(request):
             return render(request, 'payments/callback.html', context=received_data)
         return render(request, 'payments/callback.html', context=received_data)        
 
-def icecream(request):
-       
-       return  render(request ,'icecream.html')
+def icecreams(request):
+       products = icecream.objects.all()
+       n = len(products)
+       print(n)
+       nslides = n//3 +ceil((n/3)-(n//3))
+
+       params = {'no_of_slides':nslides,'range':range(1, nslides),'product' : products}
+       return  render(request ,'icecream.html' , params )
