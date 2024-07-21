@@ -14,7 +14,7 @@ class signup(models.Model):
 
 class icecream(models.Model):
      name = models.CharField(max_length=20)
-     image = models.ImageField()
+     image = models.ImageField(upload_to='home/images/')
      price = models.FloatField()
 
 class Transaction(models.Model):

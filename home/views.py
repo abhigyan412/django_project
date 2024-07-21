@@ -140,4 +140,5 @@ def handlerequest(request):
         return render(request, 'payments/callback.html', context=received_data)        
 
 def icecream(request):
+       
        return  render(request ,'icecream.html')
