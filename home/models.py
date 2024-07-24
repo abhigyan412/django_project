@@ -17,6 +17,19 @@ class icecream(models.Model):
      image = models.ImageField(upload_to='home/images/')
      price = models.FloatField()
 
+class family(models.Model):
+     name = models.CharField(max_length=20)
+     image = models.ImageField(upload_to='home/images/')
+     price = models.FloatField()
+
+class mf(models.Model):     
+     name = models.CharField(max_length=20)
+     image = models.ImageField(upload_to='home/images/')
+     price = models.FloatField()
+
+
+
+
 class Transaction(models.Model):
     made_by = models.ForeignKey(User, related_name='transactions', 
                                 on_delete=models.CASCADE)

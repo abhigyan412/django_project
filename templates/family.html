@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% block title %} contact{% endblock title %}
+
+{% block body %}
+<div class="container"  >
+    <div class="container-fluid my-4 ">
+        <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+          <div class="carousel-inner">
+            <div class="carousel-inner">
+                <h1 class="my-2  text-center"><p style="font-family:Georgia" ><div id=‘home’>FAMILY , FRIEND AND CELEBRATION</div></p></h1>
+                     
+                      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                        <div class="col">
+                          <div class="card shadow-sm">
+                            <img src='/{{fmly.0.image}}' class="d-block w-90" alt="...">
+                            <div class="card-body">
+                              <p class="card-text">{{fmly.0.name}}
+                              <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                  <button type="button" class="btn btn-sm btn-outline-secondary">BUY @67</button>
+                                 
+                                </div>
+                                <small class="text-muted"></small>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                          
+                        {%for j in fmly|slice:"1:" %}
+                        <div class="col">
+                          <div class="card shadow-sm">
+                           <img src="/media/{{fmly.j.image}}" class="d-block w-90" alt="...">
+                
+                            <div class="card-body">
+                              <p class="card-text">{{j.name}}
+                              <div class="d-flex justify-content-between align-items-center">
+                                <div class="btn-group">
+                                  <button type="button" class="btn btn-sm btn-outline-secondary">BUY</button>
+                                 
+                                </div>
+                                <small class="text-muted"></small>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                       {% endfor %}
+               
+                
+    {% endblock body %}

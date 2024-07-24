@@ -10,6 +10,8 @@ urlpatterns = [
     path("login",views.login, name ='login'),
     path("signup",views.signup_view, name ='signup'),
     path("icecream",views.icecreams , name ='icecream'),
+    path("family" ,views.fami, name ='family'), 
+    path("vc" , views.vc , name = 'vc'),
 
 
 ]

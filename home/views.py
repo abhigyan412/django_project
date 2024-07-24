@@ -13,6 +13,8 @@ from home.models import signup
 from django.contrib.auth.decorators import login_required
 from math import ceil
 from  home.models import icecream
+from home.models import family
+from home.models import mf
 
 
 
@@ -149,3 +151,23 @@ def icecreams(request):
 
        params = {'no_of_slides':nslides,'range':range(1, nslides),'product' : products}
        return  render(request ,'icecream.html' , params )
+
+
+def fami(request):
+       families = family.objects.all()
+       r = len(families)
+       print(r)
+       sr = r//3 +ceil((r/3)-(r//3))
+
+       sf = {'no_of_slides':sr,'range':range(1,sr),'fmly' : families}
+       return  render(request ,'family.html' , sf )
+
+def vc(request):
+       ves = mf.objects.all()
+       t = len(ves)
+       print(t)
+       vr = t//3 +ceil((t/3)-(t//3))
+
+       vf = {'no_of_slides':vr,'range':range(1,vr),'vy' : ves}
+       return  render(request ,'men.html' , vf )
+
