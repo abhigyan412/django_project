@@ -89,9 +89,7 @@
                 document.getElementById('div' + item).innerHTML = "<button id='minus" + item + "' class='btn btn-primary minus'>-</button> <span id='val" + item + "''>" + cart[item] + "</span> <button id='plus" + item + "' class='btn btn-primary plus'> + </button>";
 
               }
-              localStorage.setItem('cart', JSON.stringify(cart));
-              document.getElementById('cart').innerHTML = Object.keys(cart).length;
-              console.log(cart);
+              
 
             }
 
