@@ -14,7 +14,8 @@ from django.contrib.auth.decorators import login_required
 from math import ceil
 from  home.models import icecream
 from home.models import family
-from home.models import mf
+from home.models import mf , Orders
+
 
 
 
@@ -171,3 +172,18 @@ def vc(request):
        vf = {'no_of_slides':vr,'range':range(1,vr),'vy' : ves}
        return  render(request ,'men.html' , vf )
 
+
+def checkout(request):
+       if request.method=="POST": 
+        items_json= request.POST.get('itemsJson', '')
+        name=request.POST.get('name', '')
+        email=request.POST.get('email', '')
+        address=request.POST.get('address1', '') + " " + request.POST.get('address2', '')
+        city=request.POST.get('city', '')
+        state=request.POST.get('state', '')
+        zip_code=request.POST.get('zip_code', '')
+        phone=request.POST.get('phone', '')
+        
+        order = Orders(name = name  , email = email , address = address , city = city , state = state , zip_code = zip_code , phone =phone)
+        order.save()
+       return render(request,'checkout.html')

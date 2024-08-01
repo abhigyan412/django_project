@@ -4,6 +4,15 @@
 {% block body %}
 
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+  integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+  integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+
+<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+<script src="http:////cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+
 <div class="container">
   <div class="container-fluid my-4 ">
     <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
@@ -17,13 +26,11 @@
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
           <div class="col">
             <div class="card shadow-sm">
-              <img src='/{{product.0.image}}' class="d-block w-90" alt="...">
               <div class="card-body">
-                <p class="card-text" id = "namepr{{i.id}}">{{product.0.name}}
+                
                 <div class="d-flex justify-content-between align-items-center">
                   <div class="btn-group">
-                    <button type="button" id="pr{{product.0.id}}" class="btn btn-sm btn-outline-secondary cart"> BUY
-                      @67</a></button>
+                    
 
                   </div>
                   <small class="text-muted"></small>
@@ -38,7 +45,7 @@
               <img src="/media/{{product.i.image}}" class="d-block w-90" alt="...">
 
               <div class="card-body">
-                <p class="card-text">{{i.name}}
+                <p class="card-text" id="namepr{{i.id}}">{{i.name}}
                 <div class="d-flex justify-content-between align-items-center">
 
                   <span id="divpr{{i.id}}" class="divpr">
@@ -51,6 +58,18 @@
           </div>
           {% endfor %}
 
+
+
+
+
+
+          {% endblock body %}
+
+
+
+
+
+          {% block js %}
           <script>
 
             if (localStorage.getItem('cart') == null) {
@@ -62,54 +81,85 @@
 
 
             }
-            $('.cart').click(function () {
+            $('.divpr').on('click', 'button.cart', function () {
 
               var idstr = this.id.toString();
 
               if (cart[idstr] != undefined) {
-                cart[idstr] = cart[idstr] + 1;
+                qty = cart[idstr][0] + 1;
               }
               else {
-                cart[idstr] = 1;
+                qty = 1;
+                name = document.getElementById('name'+idstr).innerHTML
+                cart[idstr] = [qty , name];
+
               }
               updateCart(cart);
               localStorage.setItem('cart', JSON.stringify(cart));
-              document.getElementById('cart').innerHTML = Object.keys(cart).length;
+
+
             });
 
 
-            function clearCart() {
-              cart = JSON.parse(localStorage.getItem('cart'));
-              for (var item in cart) {
-                document.getElementById('div' + item).innerHTML = '<button id="' + item + '" class="btn btn-primary cart">BUY</button>'
-              }
-              localStorage.clear();
-              cart = {};
-              updateCart(cart);
-            }
 
 
+
+
+
+
+
+            $('#popcart').popover({ delay: 100 });
+            updatePopover(cart);
             function updatePopover(cart) {
-
+              console.log('We are inside updatePopover');
               var popStr = "";
-              popStr = popStr + "<h5> Cart for your items in my shopping cart </h5><div class='mx-2 my-2'>";
+
+
               var i = 1;
               for (var item in cart) {
-                popStr = popStr + "<b>" + i + "</b>. ";
-                popStr = popStr + document.getElementById('name' + item).innerHTML.slice(0, 19) + "... Qty: " + cart[item] + '<br>';
+                popStr = popStr + '<b>' + i + '</b>. ';
+                popStr = popStr + document.getElementById('name' + item).innerHTML.slice(0, 19) + "... Qty: " + cart[item][0] + '<br>';
                 i = i + 1;
               }
-              popStr = popStr + "</div>"
-              document.getElementById('popcart').setAttribute('data-content', popStr);
-              $('#popcart').popover('show');
+
+
+              popStr = popStr + "</div>" + "<a  href='/checkout' class=' mx-2 my-2' id ='checkout' style='color:black; background-color:light-blue; '>CHECKOUT</a>" + "<a  id='clearcart' href='#' > CLEARCART</a>"
+
+              console.log(popStr);
+              document.getElementById('popcart').setAttribute('data-bs-content', popStr);
+              const exampleEl = document.getElementById('popcart')
+              const popover = new bootstrap.Popover(exampleEl, { html: true })
+
+
+
+
             }
+
+
+
+
+           
+              $('#clearcart').click(function () {
+
+                console.log('Inside Clear Cart Function')
+                cart = JSON.parse(localStorage.getItem('cart'));
+                for (var item in cart) {
+                  document.getElementById('div' + item).innerHTML = '<button id="' + item + '"class=btn btn-primary cart">Add To Cart</button>'
+                }
+                localStorage.clear();
+                cart = {};
+                updateCart(cart);
+
+              });
+        
+
 
             function updateCart(cart) {
               var sum = 0;
 
               for (var item in cart) {
-                sum = sum + cart[item];
-                document.getElementById('div' + item).innerHTML = "<button id='minus" + item + "' class='btn btn-primary minus'>-</button> <span id='val" + item + "''>" + cart[item] + "</span> <button id='plus" + item + "' class='btn btn-primary plus'> + </button>";
+                sum = sum + cart[item][0];
+                document.getElementById('div' + item).innerHTML = "<button id='minus" + item + "' class='btn btn-primary minus'>-</button> <span id='val" + item + "''>" + cart[item][0]+ "</span> <button id='plus" + item + "' class='btn btn-primary plus'> + </button>";
 
               }
               localStorage.setItem('cart', JSON.stringify(cart));
@@ -117,33 +167,38 @@
               updatePopover(cart);
 
 
+
             }
 
-            $('.divpr').on("click", "button.minus", function () {
+            $('.divpr').on('click', 'button.minus', function () {
               a = this.id.slice(7,);
-              cart['pr' + a] = cart['pr' + a] - 1;
-              cart['pr' + a] = Math.max(0, cart['pr' + a]);
-              document.getElementById('valpr' + a).innerHTML = cart['pr' + a];
+              cart['pr' + a][0] = cart['pr' + a][0] - 1;
+              cart['pr' + a][0] = Math.max(0, cart['pr' + a][0]);
+              document.getElementById('valpr' + a).innerHTML = cart['pr' + a][0];
               updateCart(cart);
             });
 
-            $('.divpr').on("click", "button.plus", function () {
+            $('.divpr').on('click', 'button.plus', function () {
               a = this.id.slice(6,);
-              cart['pr' + a] = cart['pr' + a] + 1;
-              document.getElementById('valpr' + a).innerHTML = cart['pr' + a];
+              cart['pr' + a][0] = cart['pr' + a][0] + 1;
+              document.getElementById('valpr' + a).innerHTML = cart['pr' + a][0];
               updateCart(cart);
 
             });
+
+
+
+
+
+
+
+
+
 
 
 
           </script>
-
-
-
-
-
-          {% endblock body %}
+          {% endblock %}
 
 
 

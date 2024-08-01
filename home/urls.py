@@ -12,6 +12,7 @@ urlpatterns = [
     path("icecream",views.icecreams , name ='icecream'),
     path("family" ,views.fami, name ='family'), 
     path("vc" , views.vc , name = 'vc'),
+    path("checkout" , views.checkout , name ='checkout'),
 
 
 ]

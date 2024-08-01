@@ -84,7 +84,7 @@
         </ul>
 
 
-        <button type="button"  id = "popcart" class="btn btn-secondary mx-2" data-bs-toggle="popover" title="ORDERS" data-bs-content="And">
+        <button type="button"  id = "popcart" class="btn btn-secondary mx-2" data-bs-toggle="popover" title="WHAT YOU CHOSE?"   >
           YOUR TUB(<span id="cart">0</span>)
           </button>
 
@@ -113,45 +113,13 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.min.js" integrity="sha384-Atwg2Pkwv9vp0ygtn1JAojH0nYbwNJLPhwyoVbhoPwBhjQPR5VtM2+xf0Uwh9KtT" crossorigin="anonymous"></script>
     -->
 
-
+{% block js %} {% endblock %}
 
 
 </body>
 
 
-<script>
 
-  if (localStorage.getItem('cart') == null) {
-    var cart = {};
-  }
-  else {
-    cart = JSON.parse(localStorage.getItem('cart'));
-
-
-  }
-  $('.cart').click(function () {
-
-    var idstr = this.id.toString();
-    console.log(idstr);
-    if (cart[idstr] != undefined) {
-      cart[idstr] = cart[idstr] + 1;
-    }
-    else {
-      cart[idstr] = 1;
-    }
-    console.log(cart);
-    localStorage.setItem('cart', JSON.stringify(cart));
-    document.getElementById('cart').innerHTML = Object.keys(cart).length;
-  });
-
-  
-  var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'));
-      var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
-      return new bootstrap.Popover(popoverTriggerEl);
-    });
-
-
-</script>
 
 
 </html>
