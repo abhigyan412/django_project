@@ -182,7 +182,7 @@
         cart = JSON.parse(localStorage.getItem('cart'));
     }
     console.log(cart);
-    var sum = 0;
+
     if ($.isEmptyObject(cart)) {
         // If object is empty
         mystr = "<p>Your cart is empty, please add some items before checking out ! </p>"
@@ -194,16 +194,14 @@
         let name = cart[item][1];
         let qty = cart[item][0];
         sum = sum + qty;
-        mystr = `        <li class="list-group-item d-flex justify-content-between align-items-center">
+        mystr = `    <li class="list-group-item d-flex justify-content-between align-items-center">
                        ${name}
                         <span class="badge badge-primary badge-pill">${qty}</span>
                     </li>`
         $('#items').append(mystr);
     }
-    document.getElementById('cart').innerHTML = sum;
 
     $('#itemsJson').val(JSON.stringify(cart));
-    localStorage.clear();
 </script>
 
 

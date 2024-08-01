@@ -175,7 +175,7 @@ def vc(request):
 
 def checkout(request):
        if request.method=="POST": 
-        items_json= request.POST.get('itemsJson', '')
+        items_json=request.POST.get('itemsJson', '')
         name=request.POST.get('name', '')
         email=request.POST.get('email', '')
         address=request.POST.get('address1', '') + " " + request.POST.get('address2', '')
@@ -184,6 +184,9 @@ def checkout(request):
         zip_code=request.POST.get('zip_code', '')
         phone=request.POST.get('phone', '')
         
-        order = Orders(name = name  , email = email , address = address , city = city , state = state , zip_code = zip_code , phone =phone)
+        order = Orders(items_json = items_json , name = name  , email = email , address = address , city = city , state = state , zip_code = zip_code , phone =phone)
         order.save()
+        thank = True
+        return render(request,'checkout.html' , {'thank':thank})
+
        return render(request,'checkout.html')
