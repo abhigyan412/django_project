@@ -1,7 +1,102 @@
-{% extends 'base.html' %}
-{% block title %} contact{% endblock title %}
 
-{% block body %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+
+
+
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+  <script src="http:////cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
+
+  <!-- Bootstrap CSS -->
+  
+    
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+  
+
+ 
+  <title> {% block title %}{% endblock title %}
+    ICE CrEaMS</title>
+
+
+
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <img src="/static/Nav-Logo.png" width="140" height="120" />
+
+
+
+
+
+
+
+    {% if messages %}
+    {% for message in messages %}
+
+    <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    {% endif %}
+
+    <div class="container-fluid">
+      <a class="navbar-brand" href="/">ICE CrEaMs</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="/">HOME</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/about">ABOUT US</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="/signup" id="navbarDropdown" role="button"
+              data-bs-toggle="dropdown" aria-expanded="false">
+              SERVICES
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">Flavour quiz</a></li>
+              <li><a class="dropdown-item" href="#">Write a suggestion</a></li>
+              <li>
+                <hr class="dropdown-divider">
+              </li>
+
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/contact">CONTACT US</a>
+          </li>
+        </ul>
+
+
+        <button type="button"  id = "popcart" class="btn btn-secondary mx-2" data-bs-toggle="popover" title="WHAT YOU CHOSE?"   >
+          YOUR TUB(<span id="cart">0</span>)
+          </button>
+
+
+
+
+
+
+      </div>
+    </div>
+  </nav>
 
 <script src="https://code.jquery.com/jquery-3.7.0.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
@@ -19,39 +114,27 @@
       <div class="carousel-inner">
         <h1 class="my-2  text-center">
           <p style="font-family:Georgia">
-          <div id=‘home’>SEleCt YOur CONE</div>
+          <div id=‘home’></div>
           </p>
         </h1>
 
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-          <div class="col">
-            <div class="card shadow-sm">
-              <div class="card-body">
-                
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="btn-group">
-                    
-
-                  </div>
-                  <small class="text-muted"></small>
-                </div>
-              </div>
-            </div>
-          </div>
-
+        <div class="row row-cols-sm-2 row-cols-md-3 g-3">
           {%for i in product|slice:"1:" %}
+
           <div class="col">
             <div class="card shadow-sm">
-              <img src="/media/{{product.i.image}}" class="d-block w-90" alt="...">
+              <img src='/media/{{i.image}}' class="d-block w-50 " alt="...">
 
               <div class="card-body">
                 <p class="card-text" id="namepr{{i.id}}">{{i.name}}
                 <div class="d-flex justify-content-between align-items-center">
+                  <h6 class="card-title">Price : <span id="pricepr{{i.id}}">{{i.price}}</span></h6>
 
                   <span id="divpr{{i.id}}" class="divpr">
                     <button id="pr{{i.id}}" class="btn btn-primary cart">BUY</button>
                   </span>
                   <small class="text-muted"></small>
+
                 </div>
               </div>
             </div>
@@ -63,7 +146,7 @@
 
 
 
-          {% endblock body %}
+          
 
 
 
@@ -90,8 +173,9 @@
               }
               else {
                 qty = 1;
-                name = document.getElementById('name'+idstr).innerHTML
-                cart[idstr] = [qty , name];
+                name = document.getElementById('name' + idstr).innerHTML
+                price = document.getElementById('price' + idstr).innerHTML
+                cart[idstr] = [qty, name, price];
 
               }
               updateCart(cart);
@@ -109,7 +193,7 @@
 
 
             $('#popcart').popover({ delay: 100 });
-            updatePopover(cart);
+           
             function updatePopover(cart) {
               console.log('We are inside updatePopover');
               var popStr = "";
@@ -123,7 +207,8 @@
               }
 
 
-              popStr = popStr + "</div>" + "<a  href='/checkout' class=' mx-2 my-2' id ='checkout' style='color:black; background-color:light-blue; '>CHECKOUT</a>" + "<a  id='clearcart' href='#' > CLEARCART</a>"
+              popStr = popStr + "</div>" + "<a  href='/checkout' class=' mx-2 my-2' id ='checkout' style='color:black; background-color:light-blue; '>CHECKOUT</a>" + "<a  id ='clearcart' href='#'  onclick= 'clearcart()' > CLEARCART</a>"
+
 
               console.log(popStr);
               document.getElementById('popcart').setAttribute('data-bs-content', popStr);
@@ -133,25 +218,23 @@
 
 
 
+
+
             }
 
+            $('#clearcart').click(function (clearcart) {
+              console.log("we are inside clear cart function");
+              cart = JSON.parse(localStorage.getItem('cart'));
+              localStorage.clear();
+
+            });
 
 
 
-           
-              $('#clearcart').click(function () {
 
-                console.log('Inside Clear Cart Function')
-                cart = JSON.parse(localStorage.getItem('cart'));
-                for (var item in cart) {
-                  document.getElementById('div' + item).innerHTML = '<button id="' + item + '"class=btn btn-primary cart">Add To Cart</button>'
-                }
-                localStorage.clear();
-                cart = {};
-                updateCart(cart);
 
-              });
-        
+
+
 
 
             function updateCart(cart) {
@@ -159,22 +242,24 @@
 
               for (var item in cart) {
                 sum = sum + cart[item][0];
-                document.getElementById('div' + item).innerHTML = "<button id='minus" + item + "' class='btn btn-primary minus'>-</button> <span id='val" + item + "''>" + cart[item][0]+ "</span> <button id='plus" + item + "' class='btn btn-primary plus'> + </button>";
+                document.getElementById('div' + item).innerHTML = "<button id='minus" + item + "' class='btn btn-primary minus'>-</button> <span id='val" + item + "''>" + cart[item][0] + "</span> <button id='plus" + item + "' class='btn btn-primary plus'> + </button>";
 
               }
               localStorage.setItem('cart', JSON.stringify(cart));
               document.getElementById('cart').innerHTML = sum;
+              if (cart[item][0] != 0){
               updatePopover(cart);
-
+              }
 
 
             }
 
             $('.divpr').on('click', 'button.minus', function () {
-              a = this.id.slice(7,);
+              a = this.id.slice(7);
               cart['pr' + a][0] = cart['pr' + a][0] - 1;
               cart['pr' + a][0] = Math.max(0, cart['pr' + a][0]);
               document.getElementById('valpr' + a).innerHTML = cart['pr' + a][0];
+              
               updateCart(cart);
             });
 
@@ -185,6 +270,9 @@
               updateCart(cart);
 
             });
+
+
+
 
 
 

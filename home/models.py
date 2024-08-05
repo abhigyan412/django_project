@@ -19,12 +19,12 @@ class icecream(models.Model):
 
 class family(models.Model):
      name = models.CharField(max_length=20)
-     image = models.ImageField(upload_to='home/images/')
+     image = models.ImageField(upload_to='images/')
      price = models.FloatField()
 
 class mf(models.Model):     
      name = models.CharField(max_length=20)
-     image = models.ImageField(upload_to='home/images/')
+     image = models.ImageField(upload_to="images/")
      price = models.FloatField()
 
 
@@ -48,6 +48,7 @@ class Transaction(models.Model):
 class Orders(models.Model):
      order_id= models.AutoField(primary_key=True)
      items_json= models.CharField(max_length=5000)
+     amount=models.IntegerField(default=0)
      name=models.CharField(max_length=90)
      email=models.CharField(max_length=111)
      address=models.CharField(max_length=111)
@@ -55,6 +56,7 @@ class Orders(models.Model):
      state=models.CharField(max_length=111)
      zip_code=models.CharField(max_length=111)
      phone=models.CharField(max_length=111 , default="")
+
 
 
      

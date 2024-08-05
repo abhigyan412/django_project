@@ -8,10 +8,11 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-
+   
 
 
     <script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
     <script src="http:////cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
 
@@ -94,7 +95,7 @@
             </div>
         </div>
     </nav>
-
+\
 
 
     {% block body %}{% endblock body %}
@@ -115,18 +116,32 @@
 
     <div class="container">
         <div class="col my-4">
-            <h2> Step 1 - Icecream Checkout - Review Your Cart items </h2>
+            <div class="text-bg-primary p-3">
+            <h2>   Step 1 - Icecream Checkout - Review Your Cart items </h2>
+        </div>
+
             <div>
-                <ul class="list-group" id="items">
+                <div class="text-bg-primary p-3"><ul class="list-group-bg-primary" id="items"  ></ul></div>
+               
 
                 </ul>
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb mt-3">
+                        <li class="breadcrumb-item active" aria-current="page">Your Cart Total Is <b>Rs. <span
+                                    id="totalPrice"></b> </span>Enter your details below & place your order. Thanks for
+                            choosing Ice creams!</li>
+                    </ol>
+                </nav>
+
             </div>
         </div>
         <div class="col my-4">
             <h2> Step 2 - Enter Address & Other Details</h2>
             <form method="post" action="/checkout">{% csrf_token %}
                 <input type="hidden" name="itemsJson" id="itemsJson">
+                `<input type="hidden" name="amount" id="amount">
                 <div class="form-row">
+                    <div class="text-bg-primary p-3"></div>
                     <div class="form-group col-md-6">
                         <label for="name">Name</label>
                         <input type="text" class="form-control" id="name" name="name" placeholder="Name">
@@ -182,26 +197,42 @@
         cart = JSON.parse(localStorage.getItem('cart'));
     }
     console.log(cart);
-
+    var totalPrice = 0;
     if ($.isEmptyObject(cart)) {
         // If object is empty
         mystr = "<p>Your cart is empty, please add some items before checking out ! </p>"
         $('#items').append(mystr);
     }
-
+    var sum = 0;
     for (item in cart) {
 
         let name = cart[item][1];
         let qty = cart[item][0];
+        let itemPrice = cart[item][2];
         sum = sum + qty;
-        mystr = `    <li class="list-group-item d-flex justify-content-between align-items-center">
-                       ${name}
-                        <span class="badge badge-primary badge-pill">${qty}</span>
-                    </li>`
-        $('#items').append(mystr);
-    }
+        totalPrice = totalPrice + qty * itemPrice
 
-    
+        if (qty != 0) {
+        mystr = `        <li class="list-group-item d-flex justify-content-between align-items-center">
+                   ${name}
+                    <span class="badge bg-warning text-dark">${qty}
+</span>
+                </li>`
+        $('#items').append(mystr);
+    }  
+}
+
+    document.getElementById('totalPrice').innerHTML = totalPrice;
+
+    $('#itemsJson').val(JSON.stringify(cart));
+    {% if thank %}
+    alert('Thanks for ordering with us. Your order ID is {{id}}. Your icecream is our Delight');
+    localStorage.clear();
+    document.location = "/";
+    {% endif %}
+
+    $('#amount').val($('#totalPrice').html())
+
 </script>
 
 
