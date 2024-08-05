@@ -27,7 +27,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', default='#')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['creams200.onrender.com'  , '127.0.0.1']
+ALLOWED_HOSTS = ['creams200.onrender.com' ]
 
 
 # Application definition
@@ -150,7 +150,7 @@ PAYTM_INDUSTRY_TYPE_ID = 'Retail'
 
 #media files
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
+MEDIA_URL = ' /media/  '
 
 
 
