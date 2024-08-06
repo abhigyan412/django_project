@@ -27,7 +27,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', default='#')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['creams200.onrender.com'  , '127.0.0.1']
+ALLOWED_HOSTS = [ '127.0.0.1','ice-creams000.onrender.com']
 
 
 # Application definition
