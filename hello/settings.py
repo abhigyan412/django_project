@@ -46,6 +46,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware..WhitenoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -123,9 +124,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.2/howto/static-files/
 
 
-
-STATIC_ROOT = "app-root/repo/wsgi/static"
-
 STATIC_URL = '/static/'
 
 # Default primary key field type
@@ -136,6 +134,11 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
+
+if os.environ.get("VERCEL"):
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    
+    STATICFILES_STORAGE = whitenoise.storage.CompressedManifestStaticFilesStorage
 
 PAYTM_MERCHANT_ID = '<your_merchant_id>'
 PAYTM_SECRET_KEY = '<your_paytm_secret_key>'
