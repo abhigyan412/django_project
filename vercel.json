@@ -20,6 +20,12 @@
         {
             "src": "/(.*)",
             "dest": "hello/wsgi.py"
+        },
+        {
+            "src": "/static/(.*)",
+            "dest": "staticfiles/$1"
         }
-    ]
+    ],
+
+    "outputDirectory": "staticfiles_build"
 }
