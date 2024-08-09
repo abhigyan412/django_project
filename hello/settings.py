@@ -97,6 +97,7 @@ DATABASES = {
         'PORT': os.environ.get("5432"),
 }
 }
+print (DATABASES)
 
 #DATABASE_ROUTERS = ["routers.db_routers.py.AuthRouter"]
 
