@@ -39,7 +39,7 @@ def contact(request):
         email=request.POST.get('email')
         desc=request.POST.get('desc')
         contact=Contact(email=email , desc=desc)
-        contact.save()
+        contact.save(using = "postgres")
         messages.success(request, 'We recieved your communication, we will contact you shortly.')
     
     return render(request,'contact.html')
