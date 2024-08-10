@@ -14,8 +14,7 @@ from pathlib import Path
 
 from django.contrib.messages import constants as messages
 import os 
-#from python-dotenv import load_dotenv
-#load_dotenv()
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -88,16 +87,8 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     } ,
 
-   'postgresql': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ.get("Icecreamscontacts"),
-        'USER': os.environ.get("default"),
-        'PASSWORD': os.environ.get("J2xdI7EKzsXr"),
-        'HOST': os.environ.get("ep-noisy-frog-a4fq71wz-pooler.us-east-1.aws.neon.tech"),
-        'PORT': os.environ.get("5432"),
+   
 }
-}
-print (DATABASES)
 
 #DATABASE_ROUTERS = ["routers.db_routers.py.AuthRouter"]
 
