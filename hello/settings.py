@@ -84,11 +84,12 @@ TEMPLATES = [
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'new',
-        'USER': 'postgres',
+        'NAME': 'fds',
+        'USER': 'myuser1',
         'PASSWORD': '111',
         'HOST': 'localhost',  # Set to your PostgreSQL server address
         'PORT': '5432',       # Default PostgreSQL port
+        
     
     }
    
