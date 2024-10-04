@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% block title %} contact{% endblock title %}
+
+{% block body %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ice Cream Flavor Quiz</title>
+</head>
+<body>
+    <center><h1></h1></center>
+    <form method="post">
+        {% csrf_token %}
+        
+        <!-- Question 1 -->
+        <h2>1. What’s your ideal way to cool down on a hot day?</h2>
+        <input type="radio" name="q1" value="A"> A dip in the pool 🏊<br>
+        <input type="radio" name="q1" value="B"> Chilling with a cold brew coffee ☕<br>
+        <input type="radio" name="q1" value="C"> Enjoying fresh fruit at the park 🍉<br>
+        <input type="radio" name="q1" value="D"> Sipping on a milkshake 🍦<br><br>
+        
+        <!-- Question 2 -->
+        <h2>2. If you had to choose one dessert, which one would you pick?</h2>
+        <input type="radio" name="q2" value="A"> Tangy fruit sorbet 🍋<br>
+        <input type="radio" name="q2" value="B"> Chocolate cake 🍫<br>
+        <input type="radio" name="q2" value="C"> A bowl of mixed berries 🍓<br>
+        <input type="radio" name="q2" value="D"> Caramelized pudding 🍮<br><br>
+        
+        <!-- Question 3 -->
+        <h2>3. How would your friends describe your personality?</h2>
+        <input type="radio" name="q3" value="A"> Refreshing and energetic ⚡<br>
+        <input type="radio" name="q3" value="B"> Bold and intense 🔥<br>
+        <input type="radio" name="q3" value="C"> Sweet and lighthearted 🌸<br>
+        <input type="radio" name="q3" value="D"> Smooth and comforting 🛋️<br><br>
+        
+        <!-- Question 4 -->
+        <h2>4. What kind of adventure appeals to you the most?</h2>
+        <input type="radio" name="q4" value="A"> Hiking in the mountains 🏞️<br>
+        <input type="radio" name="q4" value="B"> Exploring a new city’s coffee shops ☕<br>
+        <input type="radio" name="q4" value="C"> A picnic by the lake 🌊<br>
+        <input type="radio" name="q4" value="D"> Relaxing in a cozy cabin 🌲<br><br>
+        
+        <!-- Question 5 -->
+        <h2>5. What's your go-to snack when you're craving something sweet?</h2>
+        <input type="radio" name="q5" value="A"> Citrus fruit or lemonade 🍋<br>
+        <input type="radio" name="q5" value="B"> Dark chocolate 🍫<br>
+        <input type="radio" name="q5" value="C"> Fresh berries 🍓<br>
+        <input type="radio" name="q5" value="D"> Nuts or caramel popcorn 🍿<br><br>
+        
+        <!-- Submit button -->
+        <button type="submit">Get My Flavor</button>
+    </form>
+</body>
+</html>
+{% endblock body %}

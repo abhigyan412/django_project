@@ -13,6 +13,8 @@ urlpatterns = [
     path("family" ,views.fami, name ='family'), 
     path("vc" , views.vc , name = 'vc'),
     path("checkout" , views.checkout , name ='checkout'),
-
+    path("suggest",views.suggest, name ='suggest'),
+    path("quiz",views.quiz, name ='quiz'),
+    
 
 ]

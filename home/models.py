@@ -8,6 +8,10 @@ class Contact(models.Model):
        email=models.CharField(max_length=122)
        desc=models.TextField(max_length=250)
 
+class suggestion(models.Model): 
+     suggestions = models.TextField(max_length=800 , null=True)
+     email=models.CharField(max_length=122 , default=False)      
+
 class signup(models.Model):
       contact  = models.IntegerField(null = False  , default=False)    
       password = models.CharField(max_length = 15)

@@ -14,7 +14,7 @@ from django.contrib.auth.decorators import login_required
 from math import ceil
 from  home.models import icecream
 from home.models import family
-from home.models import mf , Orders
+from home.models import mf , Orders , suggestion
 
 
 
@@ -39,11 +39,59 @@ def contact(request):
         email=request.POST.get('email')
         desc=request.POST.get('desc')
         contact=Contact(email=email , desc=desc)
-        contact.save(using = "postgres")
+        contact.save()
         messages.success(request, 'We recieved your communication, we will contact you shortly.')
     
     return render(request,'contact.html')
     #return HttpResponse("This is contact page ")     
+def suggest(request):
+    if request.method == "POST":
+        email=request.POST.get('email')
+        suggestion1=request.POST.get('suggestion')
+        res = suggestion(suggestions = suggestion1 , email=email )
+        res.save()
+        messages.success(request, 'We welcome your suggestion')
+    return render(request,'suggestion.html')    
+
+def quiz(request):
+     if request.method == 'POST':
+        # Get the form answers from POST data
+        answers = {
+            'q1': request.POST.get('q1'),
+            'q2': request.POST.get('q2'),
+            'q3': request.POST.get('q3'),
+            'q4': request.POST.get('q4'),
+            'q5': request.POST.get('q5')
+        }
+
+        result = calculate_flavor(answers)
+        return render(request, 'k.html' , {'flavor': result})
+     return render(request, 'j.html')
+
+
+def calculate_flavor(answers):
+    # Simple logic to calculate flavor based on answers
+    counts = {'A': 0, 'B': 0, 'C': 0, 'D': 0}
+    
+    for answer in answers.values():
+        if answer in counts:
+            counts[answer] += 1
+    
+    # Find the maximum count to determine the flavor
+    max_choice = max(counts, key=counts.get)
+    
+    # Map answers to flavors
+    flavor_map = {
+        'A': "Lemon Sorbet or Citrus Gelato",
+        'B': "Mocha or Double Chocolate Fudge",
+        'C': "Strawberry or Berry Swirl",
+        'D': "Salted Caramel or Peanut Butter"
+    }
+    
+    return flavor_map.get(max_choice, "Vanilla")  
+
+
+
 
 def login(request):
     if request.method == "POST":
