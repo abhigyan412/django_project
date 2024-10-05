@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import dj_database_url
 
 from django.contrib.messages import constants as messages
 import os 
@@ -82,17 +83,9 @@ TEMPLATES = [
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'fds',
-        'USER': 'myuser1',
-        'PASSWORD': '111',
-        'HOST': 'localhost',  # Set to your PostgreSQL server address
-        'PORT': '5432',       # Default PostgreSQL port
-        
-    
-    }
-   
+    'default': dj_database_url.config(
+        default=os.getenv('DATABASE_URL', 'postgresql://icecreamspro_user:JjoLwpSmXgKKkI7CCkczU0fYvwY0AEg7@dpg-cs0dpmjtq21c73eb15mg-a.oregon-postgres.render.com/icecreamspro')
+    )
 }
 
 #DATABASE_ROUTERS = ["routers.db_routers.py.AuthRouter"]
