@@ -84,7 +84,7 @@ TEMPLATES = [
 
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.getenv('DATABASE_URL', 'postgresql://icecreamspro_user:JjoLwpSmXgKKkI7CCkczU0fYvwY0AEg7@dpg-cs0dpmjtq21c73eb15mg-a.oregon-postgres.render.com/icecreamspro')
+        default=os.getenv('DATABASE_URL', 'postgresql://icecreams9_user:BpLX87vj4OuYCStK37jYr6vjmwb4aMiP@dpg-csne15ogph6c73bd1dg0-a.oregon-postgres.render.com/icecreams9')
     )
 }
 
